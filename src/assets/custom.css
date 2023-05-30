@@ -1,0 +1,21 @@
+#score-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+  }
+
+  .score {
+    font-size: 3rem;
+  }
+  
+  .player {
+    text-align: center;
+    margin: 2rem 3rem;
+  }
+
+  .player-name h3 {
+    font-weight: 700;
+  }
+
+  .score-cmd span {
+    margin: .5rem
+  }
