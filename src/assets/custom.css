@@ -12,19 +12,32 @@
     margin: 2rem 3rem;
   }
 
-  .player-name h3 {
-    font-weight: 700;
+  .score h3 {
+    font-weight: 800;
+    color: white;
   }
 
-  .score-cmd span {
-    margin: .5rem
+  .score-cmd {
+    display: inline-block;
   }
 
   .score-cmd button {
+    margin: 1px;
+    width: 80px;
+    font-weight: 600;
+    font-size: large;
+    color: whitesmoke;
     cursor: pointer;
-    margin-right: 5px;
     padding: 20px;
     background-color:rgb(68, 118, 255);
     border: 1px solid white;
     border-radius: 3px;
+  }
+
+  .score-cmd .left {
+    border-right: 1px solid white
+  }
+
+  .score-cmd .right {
+    border-left: 1px solid white;
   }

@@ -1,25 +1,22 @@
 <script setup>
-import { reactive } from 'vue'
-
-// reactive state
-const state = reactive({score: 0})
 
 const emit = defineEmits(['score-change'])
 
 // functions that mutate state and trigger updates
 function increment() {
-    state.score++
-    emit('score-change', state.score, props.playerId)
+    emit('score-change', true, props.playerId)
 }
 
 function decrement() {
-    if(state.score === 0 ) return;
-    state.score--;
-    emit('score-change', state.score, props.playerId)
+    if(props.score === 0) {
+        return
+    }
+    emit('score-change', false, props.playerId)
 }
 
 const props = defineProps({
     name: String,
+    score: Number,
     playerId: Number
 })
 </script>
@@ -28,10 +25,10 @@ const props = defineProps({
     <div class="player">
         <h3 class="player-name">{{ name }}</h3>
         <div class="score">
-            <h3>{{ state.score }}</h3>
+            <h3>{{ props.score }}</h3>
             <div class="score-cmd">
-                <button @click="decrement">-</button>
-                <button @click="increment">+</button>
+                <button class="left" @click="decrement">-</button>
+                <button class="right" @click="increment">+</button>
             </div>
         </div>
     </div>
