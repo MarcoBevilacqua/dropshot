@@ -10,7 +10,11 @@ function increment() {
 }
 
 function decrement() {
-  state.score--
+    if(state.score === 0){
+        state.score = 0
+        return
+    } 
+    state.score--;
 }
 
 defineProps({
