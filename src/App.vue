@@ -6,12 +6,7 @@
 
   <main>
     <div class="container">
-      <div id="score-table">
-
-        <PlayerCounter name="Marco" :score="this.playerOneScore" />
-        <PlayerCounter name="Player 2" :score="this.playerTwoScore" />
-
-      </div>
+      <score-table></score-table>
     </div>    
   </main>
   
@@ -19,11 +14,11 @@
 
 <script>
 
-import PlayerCounter from './components/player/PlayerCounter.vue';
+import ScoreTable from './components/match/ScoreTable.vue';
 
 export default {
   components: {
-    PlayerCounter
+    ScoreTable
   },
   data() {
     return {
