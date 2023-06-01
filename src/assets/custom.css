@@ -1,43 +1,42 @@
 #score-table {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
-  .score {
-    font-size: 3rem;
-  }
-  
-  .player {
-    text-align: center;
-    margin: 2rem 3rem;
-  }
+.score {
+  font-size: 3rem;
+}
 
-  .score h3 {
-    font-weight: 800;
-    color: white;
-  }
+.player {
+  text-align: center;
+  margin: 2rem 3rem;
+}
 
-  .score-cmd {
-    display: inline-block;
-  }
+.score h3 {
+  font-weight: 800;
+}
 
-  .score-cmd button {
-    margin: 1px;
-    width: 80px;
-    font-weight: 600;
-    font-size: large;
-    color: whitesmoke;
-    cursor: pointer;
-    padding: 20px;
-    background-color:rgb(68, 118, 255);
-    border: 1px solid white;
-    border-radius: 3px;
-  }
+.score-cmd {
+  display: inline-block;
+}
 
-  .score-cmd .left {
-    border-right: 1px solid white
-  }
+.score-cmd button {
+  margin: 1px;
+  width: 80px;
+  font-weight: 600;
+  font-size: large;
+  color: whitesmoke;
+  cursor: pointer;
+  padding: 20px;
+  background-color: rgb(68, 118, 255);
+  border: 1px solid white;
+  border-radius: 3px;
+}
 
-  .score-cmd .right {
-    border-left: 1px solid white;
-  }
+.score-cmd .left {
+  border-right: 1px solid white;
+}
+
+.score-cmd .right {
+  border-left: 1px solid white;
+}
