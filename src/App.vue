@@ -7,6 +7,7 @@
   <main>
     <div class="container">
       <score-table></score-table>
+      <service-table></service-table>
     </div>    
   </main>
   
@@ -15,10 +16,12 @@
 <script>
 
 import ScoreTable from './components/match/ScoreTable.vue';
+import ServiceTable from './components/match/ServiceTable.vue';
 
 export default {
   components: {
-    ScoreTable
+    ScoreTable,
+    ServiceTable
   },
   data() {
     return {
@@ -40,7 +43,7 @@ export default {
   }
 
   .container {
-    margin: 10px auto;
+    margin: 10px 40px;
   }
 }
 </style>

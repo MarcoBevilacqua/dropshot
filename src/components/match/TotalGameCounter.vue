@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
+  <div style="text-align: center;">
     <span>Game: {{ props.game }}</span>
   </div>
 </template>

@@ -6,8 +6,8 @@ import TotalGameCounter from '../match/TotalGameCounter.vue'
 const state = reactive({
   canPlay: true,
   gameStatus: 'Still playing...',
-  playerOneScore: 0,
-  playerTwoScore: 0,
+  playerOneScore: 10,
+  playerTwoScore: 9,
   gameIdx: 1
 })
 
@@ -33,36 +33,36 @@ function updateScore(score, playerId) {
     }
   }
 
-  checkScore()
+  if (pointTotal.value > 10) {
+    //check if a player won the game
+    checkScore()
+  }
 }
 
 function checkScore() {
-  if (pointTotal.value > 10) {
-    //check if a player won the game
-    let winner = checkWinner()
-    if (winner > 0) {
-      //should return the index of the winning player
-      state.canPlay = false
-      state.gameStatus = 'Winner is ' + winner
-    }
-  }
 
-  if (pointTotal.value === 20 && state.playerOneScore === 10 && state.playerTwoScore === 10) {
-    //tie break
-    state.gameStatus = 'Tie Break...'
-    while (pointDiff.value < 2) {
-      //do nothing
-      console.log('TIE BREAK')
+    if (pointTotal.value === 20 && state.playerOneScore === 10) {
+      //tie break
+      state.gameStatus = 'Tie Break...'
     }
 
-    let winner = checkWinner()
-  }
+    if(pointDiff.value === 2) {
+      //someone has won
+
+      let winner = checkWinner()
+      if (winner > 0) {
+        //should return the index of the winning player
+        state.canPlay = false
+        state.gameStatus = 'Winner is ' + winner
+      }
+    }
+
 }
 
 function checkWinner() {
   //check if either player 1 or 2 has won the game
-  if (state.playerOneScore === 11) return 1
-  if (state.playerTwoScore === 11) return 2
+  if (state.playerOneScore >= 11) return 1
+  if (state.playerTwoScore >= 11) return 2
   return 0
 }
 
@@ -75,6 +75,9 @@ function nextGame() {
 </script>
 
 <template>
+
+  <total-game-counter :game="state.gameIdx"></total-game-counter>
+
   <div id="score-table">
     <PlayerCounter
       name="Marco"
@@ -104,5 +107,5 @@ function nextGame() {
     </div>
   </div>
 
-  <total-game-counter :game="state.gameIdx"></total-game-counter>
+  
 </template>
