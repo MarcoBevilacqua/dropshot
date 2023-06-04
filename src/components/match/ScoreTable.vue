@@ -2,18 +2,25 @@
 import { computed, defineComponent, reactive } from 'vue'
 import PlayerCounter from '../player/PlayerCounter.vue'
 import TotalGameCounter from '../match/TotalGameCounter.vue'
+import ServiceTable from './ServiceTable.vue'
 
 const state = reactive({
+  //match status
   canPlay: true,
   gameStatus: 'Still playing...',
-  playerOneScore: 10,
-  playerTwoScore: 9,
-  gameIdx: 1
+  //player score
+  playerOneScore: 0,
+  playerTwoScore: 0,
+  //game index
+  gameIdx: 1,
+  //service status
+  serviceHold: 1
 })
 
 defineComponent({
   PlayerCounter,
-  TotalGameCounter
+  TotalGameCounter,
+  ServiceTable
 })
 
 const pointTotal = computed(() => {
@@ -31,6 +38,13 @@ function updateScore(score, playerId) {
     } else {
       score ? state.playerTwoScore++ : state.playerTwoScore--
     }
+
+    //hands out
+    if (state.serviceHold !== playerId) {
+      state.serviceHold = toggleService()
+    } else {
+      //keep track of the side
+    }
   }
 
   if (pointTotal.value > 10) {
@@ -40,23 +54,21 @@ function updateScore(score, playerId) {
 }
 
 function checkScore() {
+  if (pointTotal.value === 20 && state.playerOneScore === 10) {
+    //tie break
+    state.gameStatus = 'Tie Break...'
+  }
 
-    if (pointTotal.value === 20 && state.playerOneScore === 10) {
-      //tie break
-      state.gameStatus = 'Tie Break...'
+  if (pointDiff.value === 2) {
+    //someone has won
+
+    let winner = checkWinner()
+    if (winner > 0) {
+      //should return the index of the winning player
+      state.canPlay = false
+      state.gameStatus = 'Winner is ' + winner
     }
-
-    if(pointDiff.value === 2) {
-      //someone has won
-
-      let winner = checkWinner()
-      if (winner > 0) {
-        //should return the index of the winning player
-        state.canPlay = false
-        state.gameStatus = 'Winner is ' + winner
-      }
-    }
-
+  }
 }
 
 function checkWinner() {
@@ -72,12 +84,19 @@ function nextGame() {
   state.gameStatus = 'Still playing...'
   state.gameIdx++
 }
+
+function toggleService() {
+  if (state.serviceHold === 1) return (state.serviceHold = 2)
+  if (state.serviceHold === 2) return (state.serviceHold = 1)
+}
 </script>
 
 <template>
-
   <total-game-counter :game="state.gameIdx"></total-game-counter>
-
+  <service-table
+    @toggle-service-turn="toggleService"
+    :serviceHold="state.serviceHold"
+  ></service-table>
   <div id="score-table">
     <PlayerCounter
       name="Marco"
@@ -96,16 +115,13 @@ function nextGame() {
 
   <div id="score-status" style="text-align: center">
     <div>
-      {{ pointTotal }}
-    </div>
-    <div>
       {{ state.gameStatus }}
     </div>
     <div v-if="!state.canPlay">
-      <span>Match is closed</span>
+      <div class="w-full">
+        <span>Match is closed</span>
+      </div>
       <button @click="nextGame">Reset Score</button>
     </div>
   </div>
-
-  
 </template>

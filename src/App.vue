@@ -7,36 +7,22 @@
   <main>
     <div class="container">
       <score-table></score-table>
-      <service-table></service-table>
-    </div>    
+    </div>
   </main>
-  
 </template>
 
 <script>
-
-import ScoreTable from './components/match/ScoreTable.vue';
-import ServiceTable from './components/match/ServiceTable.vue';
+import ScoreTable from './components/match/ScoreTable.vue'
 
 export default {
   components: {
-    ScoreTable,
-    ServiceTable
-  },
-  data() {
-    return {
-      playerOneScore: 0,
-      playerTwoScore: 0,
-    }
+    ScoreTable
   }
 }
-
 </script>
 
 <style scoped>
-
 @media (min-width: 1024px) {
-
   .header {
     margin: 2rem auto;
     text-align: center;
