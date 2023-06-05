@@ -24,7 +24,10 @@ const props = defineProps({
 <template>
   <div class="player">
     <h3 class="player-name">{{ name }}</h3>
-    <div :class="{ invisible: service !== playerId }" class="ball"></div>
+    <div :class="{ invisible: service !== playerId }" class="ball">
+      <div id="ball-point-left" class="ball-point"></div>
+      <div id="ball-point-right" class="ball-point"></div>
+    </div>
     <div class="score">
       <h3 :data-cy="'score-' + playerId">{{ props.score }}</h3>
       <div class="score-cmd">
@@ -46,5 +49,23 @@ const props = defineProps({
   background-color: black;
   border-radius: 25px;
   float: right;
+}
+
+.ball-point {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: yellow;
+  position: relative;
+}
+
+#ball-point-left {
+  left: 5px;
+  top: 6px;
+}
+
+#ball-point-right {
+  top: 2px;
+  right: -15px;
 }
 </style>
