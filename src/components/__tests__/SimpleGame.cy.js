@@ -8,6 +8,10 @@ describe('this is a simple game test', () => {
 
   it('should get a 3-3 score status', () => {
     cy.mount(ScoreTable)
-    cy.get('[data-cy="player1-counter"]').get('button').should('have.text', 'Still playing...')
+    cy.get('[data-cy="increment-btn-1"]').click().click().click()
+    cy.get('[data-cy="increment-btn-2"]').click().click().click()
+
+    cy.get('[data-cy="player1-counter"]').get('[data-cy="score-1"]').should('have.text', '3')
+    cy.get('[data-cy="player2-counter"]').get('[data-cy="score-2"]').should('have.text', '3')
   })
 })

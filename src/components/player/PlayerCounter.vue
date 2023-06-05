@@ -26,10 +26,10 @@ const props = defineProps({
     <h3 class="player-name">{{ name }}</h3>
     <div :class="{ invisible: service !== playerId }" class="ball"></div>
     <div class="score">
-      <h3>{{ props.score }}</h3>
+      <h3 :data-cy="'score-' + playerId">{{ props.score }}</h3>
       <div class="score-cmd">
-        <button class="left" @click="decrement">-</button>
-        <button class="right" @click="increment">+</button>
+        <button class="left" :data-cy="'decrement-btn-' + playerId" @click="decrement">-</button>
+        <button class="right" :data-cy="'increment-btn-' + playerId" @click="increment">+</button>
       </div>
     </div>
   </div>
