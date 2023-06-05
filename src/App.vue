@@ -29,7 +29,8 @@ export default {
   }
 
   .container {
-    margin: 10px 40px;
+    max-width: 800px;
+    margin: 0 auto;
   }
 }
 </style>

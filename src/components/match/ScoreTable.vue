@@ -59,7 +59,7 @@ function checkScore() {
     state.gameStatus = 'Tie Break...'
   }
 
-  if (pointDiff.value === 2) {
+  if (pointDiff.value >= 2) {
     //someone has won
 
     let winner = checkWinner()
@@ -102,20 +102,26 @@ function toggleService() {
       name="Marco"
       :playerId="1"
       :score="state.playerOneScore"
+      :service="state.serviceHold"
       @score-change="updateScore"
+      data-cy="player1-counter"
     />
 
     <PlayerCounter
       name="Player 2"
       :playerId="2"
       :score="state.playerTwoScore"
+      :service="state.serviceHold"
       @score-change="updateScore"
+      data-cy="player2-counter"
     />
   </div>
 
   <div id="score-status" style="text-align: center">
-    <div>
-      {{ state.gameStatus }}
+    <div class="score-status-container">
+      <span data-cy="score-status" class="score-status-text">
+        {{ state.gameStatus }}
+      </span>
     </div>
     <div v-if="!state.canPlay">
       <div class="w-full">
