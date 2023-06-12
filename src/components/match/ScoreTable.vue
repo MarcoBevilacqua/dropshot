@@ -14,7 +14,9 @@ const state = reactive({
   //game index
   gameIdx: 1,
   //service status
-  serviceHold: 1
+  serviceHold: 1,
+  //service side
+  serviceSide: true
 })
 
 defineComponent({
@@ -44,6 +46,7 @@ function updateScore(score, playerId) {
       state.serviceHold = toggleService()
     } else {
       //keep track of the side
+      state.serviceSide = !state.serviceSide
     }
   }
 
@@ -83,6 +86,7 @@ function nextGame() {
   state.canPlay = true
   state.gameStatus = 'Still playing...'
   state.gameIdx++
+  state.serviceSide = true
 }
 
 function toggleService() {
@@ -93,6 +97,10 @@ function toggleService() {
 
 <template>
   <total-game-counter :game="state.gameIdx"></total-game-counter>
+  <div class="service-side">
+    <div v-if="state.serviceSide" id="service-left">R</div>
+    <div v-else id="service-right">L</div>
+  </div>
   <service-table
     @toggle-service-turn="toggleService"
     :serviceHold="state.serviceHold"
@@ -131,3 +139,15 @@ function toggleService() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.service-side {
+  width: 15px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: rgb(12, 146, 0);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+}
+</style>
