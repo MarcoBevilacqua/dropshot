@@ -52,7 +52,6 @@ const props = defineProps({
   height: 25px;
   background-color: black;
   border-radius: 25px;
-  float: right;
 }
 
 .ball-point {
