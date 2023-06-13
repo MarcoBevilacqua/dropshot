@@ -1,3 +1,8 @@
+.header {
+  margin: 2rem auto;
+  text-align: center;
+}
+
 #score-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -16,14 +21,16 @@
   font-weight: 800;
 }
 
-.score-cmd {
-  display: inline-block;
+.score-cmd .inner {
+  display: flex;
+  justify-content: center;
 }
 
-.score-cmd button {
-  margin: 1px;
-  width: 80px;
-  font-weight: 600;
+.score-cmd a {
+  line-height: 2px;
+  width: 4rem;
+  height: 1.5rem;
+  font-weight: 800;
   font-size: large;
   color: whitesmoke;
   cursor: pointer;

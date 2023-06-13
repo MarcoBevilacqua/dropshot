@@ -23,13 +23,22 @@ export default {
 
 <style scoped>
 @media (min-width: 1024px) {
-  .header {
-    margin: 2rem auto;
-    text-align: center;
-  }
-
   .container {
     max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    max-width: 370px;
     margin: 0 auto;
   }
 }
