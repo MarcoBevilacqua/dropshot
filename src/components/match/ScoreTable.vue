@@ -2,7 +2,7 @@
 import { computed, defineComponent, reactive } from 'vue'
 import PlayerCounter from '../player/PlayerCounter.vue'
 import TotalGameCounter from '../match/TotalGameCounter.vue'
-import ServiceTable from './ServiceTable.vue'
+import Toolbar from './Toolbar.vue'
 
 const state = reactive({
   //match status
@@ -22,7 +22,7 @@ const state = reactive({
 defineComponent({
   PlayerCounter,
   TotalGameCounter,
-  ServiceTable
+  Toolbar
 })
 
 const pointTotal = computed(() => {
@@ -44,6 +44,7 @@ function updateScore(score, playerId) {
     //hands out
     if (state.serviceHold !== playerId) {
       state.serviceHold = toggleService()
+      state.serviceSide = true
     } else {
       //keep track of the side
       state.serviceSide = !state.serviceSide
@@ -92,19 +93,13 @@ function nextGame() {
 function toggleService() {
   if (state.serviceHold === 1) return (state.serviceHold = 2)
   if (state.serviceHold === 2) return (state.serviceHold = 1)
+  state.serviceSide = !state.serviceSide
 }
 </script>
 
 <template>
   <total-game-counter :game="state.gameIdx"></total-game-counter>
-  <div class="service-side">
-    <div v-if="state.serviceSide" id="service-left">R</div>
-    <div v-else id="service-right">L</div>
-  </div>
-  <service-table
-    @toggle-service-turn="toggleService"
-    :serviceHold="state.serviceHold"
-  ></service-table>
+  <Toolbar @toggle-service-turn="toggleService" :serviceHold="state.serviceHold"></Toolbar>
   <div id="score-table">
     <PlayerCounter
       name="Marco"
@@ -127,7 +122,15 @@ function toggleService() {
 
   <div id="score-status" style="text-align: center">
     <div class="score-status-container">
-      <span data-cy="score-status" class="score-status-text">
+      <h5>Game Status</h5>
+      <span
+        data-cy="score-status"
+        class="score-status-text"
+        :class="{
+          'tie-break': state.gameStatus === 'Tie Break...',
+          'game-over': !state.canPlay
+        }"
+      >
         {{ state.gameStatus }}
       </span>
     </div>
@@ -135,19 +138,28 @@ function toggleService() {
       <div class="w-full">
         <span>Match is closed</span>
       </div>
-      <button @click="nextGame">Reset Score</button>
+      <a @click="nextGame">Reset Score</a>
     </div>
   </div>
 </template>
 
 <style scoped>
-.service-side {
-  width: 15px;
-  text-align: center;
-  border-radius: 4px;
-  background-color: rgb(12, 146, 0);
+.score-status-container h5 {
+  margin-bottom: 4px;
+}
+
+.score-status-text {
+  border-radius: 3px;
+  border: 1px solid rgb(92, 92, 92);
+  padding: 6px 12px;
+}
+
+.score-status-text.tie-break {
+  background-color: yellow;
+}
+
+.score-status-text.game-over {
+  background-color: green;
   color: white;
-  font-size: 13px;
-  font-weight: 800;
 }
 </style>
