@@ -16,7 +16,9 @@ const state = reactive({
   //service status
   serviceHold: 1,
   //service side
-  serviceSide: true
+  serviceSide: true,
+  //games
+  games: []
 })
 
 defineComponent({
@@ -83,11 +85,12 @@ function checkWinner() {
 }
 
 function nextGame() {
-  state.playerOneScore = state.playerTwoScore = 0
   state.canPlay = true
   state.gameStatus = 'Still playing...'
   state.gameIdx++
   state.serviceSide = true
+  state.games.push({ playerOne: state.playerOneScore, playerTwo: state.playerTwoScore })
+  state.playerOneScore = state.playerTwoScore = 0
 }
 
 function toggleService() {
@@ -111,7 +114,7 @@ function toggleServiceSide() {
   ></Toolbar>
   <div id="score-table">
     <PlayerCounter
-      name="Marco"
+      name="Player 1"
       :playerId="1"
       :score="state.playerOneScore"
       :service="state.serviceHold"
@@ -147,7 +150,13 @@ function toggleServiceSide() {
       <div class="w-full">
         <span>Match is closed</span>
       </div>
-      <a @click="nextGame">Reset Score</a>
+      <a data-cy="reset-score-btn" @click="nextGame">Reset Score</a>
+    </div>
+  </div>
+  <div id="game-count">
+    <div v-for="(game, gameIdx) in state.games" :class="'game-history-' + (gameIdx + 1)">
+      <h5 class="game-counter-title">Game {{ gameIdx }}</h5>
+      {{ game.playerOne }} / {{ game.playerTwo }}
     </div>
   </div>
 </template>
@@ -170,5 +179,18 @@ function toggleServiceSide() {
 .score-status-text.game-over {
   background-color: green;
   color: white;
+}
+
+#game-count {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#game-count div {
+  width: 20rem;
+
+  border: 1px solid gray;
+  margin: 3px;
 }
 </style>
