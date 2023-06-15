@@ -22,24 +22,25 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin: 0 auto;
+}
+
+@media (min-width: 520px) {
+  .container {
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 760px) {
+  .container {
+    max-width: 680px;
+  }
+}
+
 @media (min-width: 1024px) {
   .container {
     max-width: 800px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 400px) {
-  .container {
-    max-width: 370px;
-    margin: 0 auto;
   }
 }
 </style>

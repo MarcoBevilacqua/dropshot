@@ -95,11 +95,20 @@ function toggleService() {
   if (state.serviceHold === 2) return (state.serviceHold = 1)
   state.serviceSide = !state.serviceSide
 }
+
+function toggleServiceSide() {
+  state.serviceSide = !state.serviceSide
+}
 </script>
 
 <template>
   <total-game-counter :game="state.gameIdx"></total-game-counter>
-  <Toolbar @toggle-service-turn="toggleService" :serviceHold="state.serviceHold"></Toolbar>
+  <Toolbar
+    @toggle-service-turn="toggleService"
+    :serviceHold="state.serviceHold"
+    @toggle-service-side="toggleServiceSide"
+    :serviceSide="state.serviceSide"
+  ></Toolbar>
   <div id="score-table">
     <PlayerCounter
       name="Marco"

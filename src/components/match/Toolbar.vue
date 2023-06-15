@@ -1,10 +1,9 @@
 <script setup>
-import { reactive } from 'vue'
-const state = reactive({
-  //service side
-  serviceSide: true
+const emit = defineEmits(['toggle-service-turn', 'toggle-service-side'])
+
+const props = defineProps({
+  serviceSide: Boolean
 })
-const emit = defineEmits(['toggleServiceTurn'])
 </script>
 
 <template>
@@ -14,11 +13,11 @@ const emit = defineEmits(['toggleServiceTurn'])
         <a @click="emit('toggle-service-turn')">Change Service Turn</a>
       </div>
       <div class="toolbar-item">
-        <a @click="state.serviceSide = !state.serviceSide">Toggle service side</a>
+        <a @click="emit('toggle-service-side')">Toggle service side</a>
       </div>
     </div>
     <div class="service-side">
-      <span v-if="state.serviceSide" id="service-left">R</span>
+      <span v-if="props.serviceSide" id="service-left">R</span>
       <span v-else id="service-right">L</span>
     </div>
   </div>
