@@ -26,6 +26,12 @@
   justify-content: center;
 }
 
+.dropshot-link {
+  font-size: 10px;
+  padding: 4px;
+  cursor: pointer;
+}
+
 .score-cmd a {
   line-height: 2px;
   width: 4rem;

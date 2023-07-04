@@ -147,10 +147,7 @@ function toggleServiceSide() {
       </span>
     </div>
     <div v-if="!state.canPlay">
-      <div class="w-full">
-        <span>Match is closed</span>
-      </div>
-      <a data-cy="reset-score-btn" @click="nextGame">Reset Score</a>
+      <a class="dropshot-link" data-cy="reset-score-btn" @click="nextGame">Reset Score</a>
     </div>
   </div>
   <div id="game-count">

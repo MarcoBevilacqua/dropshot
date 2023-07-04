@@ -10,15 +10,13 @@ const props = defineProps({
   <div id="toolbar" style="display: flex; justify-content: space-between; align-items: center">
     <div id="left">
       <div class="toolbar-item">
-        <a @click="emit('toggle-service-turn')">Change Service Turn</a>
-      </div>
-      <div class="toolbar-item">
-        <a @click="emit('toggle-service-side')">Toggle service side</a>
+        <a @click="emit('toggle-service-turn')">Hand out</a>
       </div>
     </div>
     <div class="service-side">
       <span v-if="props.serviceSide" id="service-left">R</span>
       <span v-else id="service-right">L</span>
+      <a class="dropshot-link" @click="emit('toggle-service-side')">toggle</a>
     </div>
   </div>
 </template>
